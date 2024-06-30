@@ -1,3 +1,7 @@
+data "template_file" "user_data" {
+  template = file("${path.module}/user_data.sh")
+}
+
 resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -30,6 +34,8 @@ resource "openstack_compute_instance_v2" "www_workload_instance" {
   network {
     name = "Ext-Net"
   }
+
+  user_data = data.template_file.user_data.rendered
 
   lifecycle {
     postcondition {

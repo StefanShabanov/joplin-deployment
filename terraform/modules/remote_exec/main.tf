@@ -1,4 +1,4 @@
-resource "null_resource" "wine_installation" {
+resource "null_resource" "docker_installation" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
@@ -8,14 +8,14 @@ resource "null_resource" "wine_installation" {
   }
 
   provisioner "file" {
-    source      = "../common/winehq_installation.sh"
-    destination = "/tmp/winehq_installation.sh"
+    source      = "../../../scripts/docker_install.sh"
+    destination = "/tmp/docker_install.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/winehq_installation.sh",
-      "/tmp/winehq_installation.sh ${var.winehq_version}",
+      "chmod +x /tmp/docker_install.sh",
+      "/tmp/docker_install.sh",
     ]
   }
 }
