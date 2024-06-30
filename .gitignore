@@ -1,3 +1,6 @@
 *.tfvars
 /terraform/.terraform.lock.hcl
 /terraform/.terraform/
+*.tfstate
+*.tfstate.*
+ssh_key_*
